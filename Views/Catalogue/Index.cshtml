@@ -1,0 +1,68 @@
+﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@using MbmStore.Models;
+@{
+    ViewData["Title"] = "Catalogue";
+}
+
+
+
+<h1>Catalogue</h1>
+
+<h3> Movies</h3>
+@foreach (Product product in ViewBag.Products)
+{
+    if (product is Movie)
+    {
+        Movie movie = (Movie)product;
+        <div>
+            <img src="/Content/Images/@movie.ImageFileName" alt="@movie.Title"><br>
+            <strong>Title:</strong> @movie.Title<br />
+            Director: @movie.Director<br>
+            Price: @String.Format("{0:0.00}", movie.Price) <br /><br />
+        </div>
+    }
+
+}
+<h3> Books</h3>
+@foreach (Product product in ViewBag.Products)
+{
+    if (product is Book)
+    {
+        Book book = (Book)product;
+        <div>
+            <img src="/Content/Images/@book.ImageFileName" alt="@book.Title"><br>
+            <strong>Title:</strong> @book.Title<br />
+            Director: @book.Author<br>
+            Price: @String.Format("{0:0.00}", book.Price) <br /><br />
+        </div>
+    }
+
+}
+
+
+<h3> MusicCd</h3>
+
+@foreach (Product product in ViewBag.Products)
+{
+    if (product is MusicCD)
+    {
+        MusicCD musiccd = (MusicCD)product;
+        <div>
+            <img src="/Content/Images/@musiccd.ImageFileName" alt="@musiccd.Title"><br>
+            <strong>Title:</strong> @musiccd.Title<br>
+            Artist: @musiccd.Artist<br>
+            Price: @String.Format("{0:0.00}", musiccd.Price)<br>
+            Year: @musiccd.Released<br> <br>
+        </div>
+    }
+}
+
+@foreach (Customer customer in ViewBag.Customers)
+{
+    <h2>@customer.Firstname @customer.Lastname</h2>
+    <p>
+        Adresse: @customer.Address <br />
+        Post nr. by: @customer.Zip @customer.City <br />
+        Tlf. nr.: @customer.Phonenumber <br />
+    </p>
+}
